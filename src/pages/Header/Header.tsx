@@ -11,10 +11,9 @@ type Props = {}
 
 const Header = (props: Props) => {
 	const getWeather = async () => {
-		setCountry(newInput.current.value)
-		const weather = await ky
+		const weather: any = await ky
 			.get(
-				`https://api.openweathermap.org/data/2.5/weather?q=${county}&lang=ru&appid=4db0dc1c43e9a5ed167c1b6eb6886051`,
+				`https://api.openweathermap.org/data/2.5/weather?q=${newInput.current.value}&lang=ru&appid=4db0dc1c43e9a5ed167c1b6eb6886051`,
 				{
 					retry: {
 						limit: 10,
@@ -24,6 +23,7 @@ const Header = (props: Props) => {
 				}
 			)
 			.json()
+
 		let weatherIcon: string = weather.weather[0].main
 		if (weatherIcon == 'Clouds') {
 			setSunnyDay(false)
@@ -84,7 +84,6 @@ const Header = (props: Props) => {
 	const [sealevel, setSeaLevel] = useState(0)
 	const [windSpeed, setWindSpeed] = useState(0)
 	const [cloudless, setCloudless] = useState(0)
-	const [county, setCountry] = useState('')
 	const [pressuree, setPressuree] = useState(0)
 	const [town, setTown] = useState('')
 	const [tempe, setTempe] = useState(0)
@@ -94,7 +93,7 @@ const Header = (props: Props) => {
 	const [cloudsDay, setCloudsDay] = useState(false)
 	const [rainDay, setRainDay] = useState(false)
 	const [desWeather, setDesWeather] = useState('')
-	let newInput = React.createRef()
+	let newInput = React.useRef() as React.MutableRefObject<HTMLInputElement>
 	const [darkTheme, setDarkTheme] = useState(false)
 	return (
 		<>

@@ -29,15 +29,15 @@ const Home = (props: Props) => {
 						<p className={styles.weather_town}>Город: {props.town}</p>
 					</div>
 					<div className={styles.cont_img}>
-						<img
-							src={
-								(props.cloudsDay && clouds) ||
-								(props.sunnyDay && sun) ||
-								(props.rainDay && rain)
-							}
-							alt='icon'
-							className={styles.weather_img}
-						/>
+						{props.cloudsDay && (
+							<img src={clouds} alt='icon' className={styles.weather_img} />
+						)}
+						{props.sunnyDay && (
+							<img src={sun} alt='icon' className={styles.weather_img} />
+						)}
+						{props.rainDay && (
+							<img src={rain} alt='icon' className={styles.weather_img} />
+						)}
 					</div>
 				</div>
 				<div className={styles.information}>
